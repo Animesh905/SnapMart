@@ -4,6 +4,7 @@ namespace SnapMart.Application.Members.Commands;
 
 public sealed record CreateMemberCommand(
     string FirstName,
+    string MiddleName,
     string LastName,
     string MobileNumber,
     string Email,

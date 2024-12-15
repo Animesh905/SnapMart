@@ -2,10 +2,14 @@
 
 public abstract class Entity : IEquatable<Entity>
 {
-    protected Guid Id { get; init; }
+    public Guid Id { get; init; }
 
     protected Entity(Guid id) => Id = id;
 
+    protected Entity()
+    {
+
+    }
     public static bool operator ==(Entity? first, Entity? second)
     {
         if (ReferenceEquals(first, second))

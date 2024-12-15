@@ -2,6 +2,7 @@
 
 public sealed record RegisterMemberRequest(
     string FirstName,
+    string MiddleName,
     string LastName,
     string MobileNumber,
     string Email,
