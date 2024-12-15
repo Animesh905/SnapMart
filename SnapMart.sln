@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapMart.WebApi", "SnapMart.WebApi\SnapMart.WebApi.csproj", "{6C8F487F-7EB2-4ACD-8694-AE22B1D1DE14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapMart.Persistence", "SnapMart.Persistence\SnapMart.Persistence.csproj", "{0EC7A630-F977-465E-8678-1A599BAD9998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapMart.Infrastructure", "SnapMart.Infrastructure\SnapMart.Infrastructure.csproj", "{0F6867EB-8ED3-410A-8D5B-A8CD8CED7A48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapMart.Domain", "SnapMart.Domain\SnapMart.Domain.csproj", "{72DFA12B-6285-45EE-B940-45B7666B8C3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapMart.Application", "SnapMart.Application\SnapMart.Application.csproj", "{8D93A392-89C4-4A19-AB05-DAF79CF4EC27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapMart.XUnitTest", "SnapMart.XUnitTest\SnapMart.XUnitTest.csproj", "{2D30E316-8D50-4FBF-86CC-85DA1D013417}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C8F487F-7EB2-4ACD-8694-AE22B1D1DE14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8F487F-7EB2-4ACD-8694-AE22B1D1DE14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8F487F-7EB2-4ACD-8694-AE22B1D1DE14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8F487F-7EB2-4ACD-8694-AE22B1D1DE14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC7A630-F977-465E-8678-1A599BAD9998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC7A630-F977-465E-8678-1A599BAD9998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC7A630-F977-465E-8678-1A599BAD9998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC7A630-F977-465E-8678-1A599BAD9998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6867EB-8ED3-410A-8D5B-A8CD8CED7A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6867EB-8ED3-410A-8D5B-A8CD8CED7A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6867EB-8ED3-410A-8D5B-A8CD8CED7A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6867EB-8ED3-410A-8D5B-A8CD8CED7A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72DFA12B-6285-45EE-B940-45B7666B8C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72DFA12B-6285-45EE-B940-45B7666B8C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72DFA12B-6285-45EE-B940-45B7666B8C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72DFA12B-6285-45EE-B940-45B7666B8C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D93A392-89C4-4A19-AB05-DAF79CF4EC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D93A392-89C4-4A19-AB05-DAF79CF4EC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D93A392-89C4-4A19-AB05-DAF79CF4EC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D93A392-89C4-4A19-AB05-DAF79CF4EC27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D30E316-8D50-4FBF-86CC-85DA1D013417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D30E316-8D50-4FBF-86CC-85DA1D013417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D30E316-8D50-4FBF-86CC-85DA1D013417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D30E316-8D50-4FBF-86CC-85DA1D013417}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {821B9492-D2BE-4D5F-81B5-42A00CCF1DBA}
+	EndGlobalSection
+EndGlobal
