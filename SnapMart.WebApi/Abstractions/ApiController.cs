@@ -4,56 +4,42 @@ using SnapMart.Domain.Shared;
 
 namespace SnapMart.WebApi.Abstractions;
 
-public class ApiController : ControllerBase
+public abstract class ApiController : ControllerBase
 {
-    protected readonly ISender _sender;
-    protected ApiController(ISender sender) => _sender = sender;
+    protected readonly ISender Sender;
+
+    protected ApiController(ISender sender) => Sender = sender;
+
     protected IActionResult HandleFailure(Result result) =>
-    result switch
-    {
-        { IsSuccess: true } => throw new InvalidOperationException(),
-        { IsFailure: true } when result is IValidationResult validationResult =>
-            BadRequest(
-                CreateProblemDetails(
-                    "Validation Error",
-                    StatusCodes.Status400BadRequest,
-                    IValidationResult.ValidationError,
-                    validationResult.Errors.Select(e => new ValidationError
-                    {
-                        Code = e.Code,
-                        Description = e.Description
-                    }))),
-        _ =>
-            BadRequest(
-                CreateProblemDetails(
-                    "Bad Request",
-                    StatusCodes.Status400BadRequest,
-                    result.Error))
-    };
-
-
-
-    private ProblemDetails CreateProblemDetails(
-    string title, int status, Error error, IEnumerable<ValidationError> validationErrors = null)
-    {
-        var problemDetails = new ProblemDetails
+        result switch
         {
-            Title = title,
-            Status = status,
-            Detail = error?.Description
+            { IsSuccess: true } => throw new InvalidOperationException(),
+            IValidationResult validationResult =>
+                BadRequest(
+                    CreateProblemDetails(
+                        "Validation Error", StatusCodes.Status400BadRequest,
+                        result.Error,
+                        validationResult.Errors)),
+            _ =>
+                BadRequest(
+                    CreateProblemDetails(
+                        "Bad Request",
+                        StatusCodes.Status400BadRequest,
+                        result.Error))
         };
 
-        if (validationErrors != null)
+    private static ProblemDetails CreateProblemDetails(
+        string title,
+        int status,
+        Error error,
+        Error[]? errors = null) =>
+        new()
         {
-            problemDetails.Extensions["errors"] = validationErrors
-                .Select(e => new
-                {
-                    e.Code,
-                    e.Description
-                });
-        }
-
-        return problemDetails;
-    }
-
+            Title = title,
+            Type = error.Code,
+            Detail = error.Message,
+            Status = status,
+            Extensions = { { nameof(errors), errors } }
+        };
 }
+

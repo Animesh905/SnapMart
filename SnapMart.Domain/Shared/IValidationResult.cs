@@ -4,7 +4,7 @@ namespace SnapMart.Domain.Shared;
 
 public interface IValidationResult
 {
-    public static Error ValidationError = Error.Validation(
+    public static Error ValidationError = new(
         "ValidationError",
         "A validation problem occured."
         );

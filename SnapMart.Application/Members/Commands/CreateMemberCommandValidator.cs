@@ -15,7 +15,6 @@ namespace SnapMart.Application.Members.Commands
         {
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .WithMessage(EmailErrors.Empty.Description)
                 .WithErrorCode(EmailErrors.Empty.Code);
 
             RuleFor(x => x.FirstName)

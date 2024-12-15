@@ -1,12 +1,26 @@
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using SnapMart.Application.Behavior;
+using SnapMart.Persistence;
+using SnapMart.Persistence.Interceptors;
 using SnapMart.WebApi;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
+
+builder
+    .Services
+    .Scan(
+        selector => selector
+            .FromAssemblies(
+                //SnapMart.Infrastructure.AssemblyReference.Assembly,
+                SnapMart.Persistence.AssemblyReference.Assembly)
+            .AddClasses(false)
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
 
 builder.Services.AddMediatR(cfg => 
        cfg.RegisterServicesFromAssembly(SnapMart.Application.AssemblyReference.Assembly));
@@ -16,6 +30,21 @@ builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipeli
 builder.Services.AddValidatorsFromAssembly(SnapMart.Application.AssemblyReference.Assembly,
     includeInternalTypes: true);
 
+
+builder.Services.AddSingleton<ConvertDomainEventsToOutboxMessagesInterceptor>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(
+    (sp, optionsBuilder) =>
+    {
+        var interceptor = sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>();
+
+        optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("Database"))
+            .AddInterceptors(interceptor)
+            .ConfigureWarnings(warnings =>
+                warnings.Ignore(RelationalEventId.PendingModelChangesWarning))
+            .EnableSensitiveDataLogging() // Development only
+            .LogTo(Console.WriteLine);    // Development only
+    });
 
 // Swagger configuration for API documentation
 builder.Services.ConfigureSwagger();
@@ -64,11 +93,6 @@ builder.Services.AddRateLimiter(options =>
         Console.WriteLine($"Rejected Response Status Code: {context.HttpContext.Response.StatusCode}");
     };
 });
-
-
-
-
-
 
 var app = builder.Build();
 
