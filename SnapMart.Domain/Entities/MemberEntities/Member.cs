@@ -1,7 +1,7 @@
 ﻿using SnapMart.Domain.Primitives;
 using SnapMart.Domain.ValueObjects;
 
-namespace SnapMart.Domain.Entities;
+namespace SnapMart.Domain.Entities.MemberEntities;
 public sealed class Member : AggregateRoot
 {
     private Member(Guid id,
@@ -11,7 +11,7 @@ public sealed class Member : AggregateRoot
         PhoneNo PhoneNo,
         bool isActive,
         Email Email,
-        string CreatedBy) 
+        string CreatedBy)
         : base(id)
     {
         this.FirstName = FirstName;

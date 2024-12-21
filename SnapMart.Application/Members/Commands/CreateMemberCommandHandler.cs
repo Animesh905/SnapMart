@@ -1,9 +1,10 @@
 ﻿using SnapMart.Application.Abstractions.Messaging;
-using SnapMart.Domain.Entities;
+using SnapMart.Domain.Entities.MemberEntities;
 using SnapMart.Domain.Errors;
 using SnapMart.Domain.Repositories;
 using SnapMart.Domain.Shared;
 using SnapMart.Domain.ValueObjects;
+using SnapMart.Domain.ValueObjects.MemberValueObjects;
 
 namespace SnapMart.Application.Members.Commands;
 
@@ -25,14 +26,17 @@ internal sealed class CreateMemberCommandHandler : ICommandHandler<CreateMemberC
         Result<LastName> lastname = LastName.Create(command.LastName);
         Result<Email> email = Email.Create(command.Email);
         Result<PhoneNo> phoneno = PhoneNo.Create(command.MobileNumber);
+        Result<PasswordHash> passwordHash = PasswordHash.Create(command.Password);
 
         if(!await _memberRepository.IsEmailUniqueAsync(email.Value, cancellationToken))
         {
             return Result.Failure<Guid>(DomainErrors.Member.EmailAlreadyInUse);
         }
 
+        var id = Guid.NewGuid(); 
+
         var member = Member.Create(
-            Guid.NewGuid(),
+            id,
             firstnameresult.Value,
             middlename.Value,
             lastname.Value,
@@ -42,7 +46,15 @@ internal sealed class CreateMemberCommandHandler : ICommandHandler<CreateMemberC
             "1"
             );
 
+        var membercredential = MemberCredential.Create(
+            id,
+            passwordHash.Value,
+            passwordHash.Value.Salt
+            );
+
         _memberRepository.Add(member);
+
+        _memberRepository.Add(membercredential);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

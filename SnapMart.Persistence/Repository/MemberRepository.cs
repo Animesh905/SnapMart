@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SnapMart.Domain.Entities;
+using SnapMart.Domain.Entities.MemberEntities;
 using SnapMart.Domain.Repositories;
 using SnapMart.Domain.ValueObjects;
 
@@ -12,6 +12,8 @@ public sealed class MemberRepository : IMemberRepository
 
     public void Add(Member member) => _dbContext.Set<Member>().Add(member);
 
+    public void Add(MemberCredential memberCredential) => _dbContext.Set<MemberCredential>().Add(memberCredential);
+    
     public async Task<bool> IsEmailUniqueAsync(Email email, CancellationToken cancellationToken = default) =>
         !await _dbContext.Set<Member>().AnyAsync(x => x.Email == email, cancellationToken);
 }
