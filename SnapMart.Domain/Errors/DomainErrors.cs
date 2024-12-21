@@ -62,4 +62,12 @@ public static class DomainErrors
             "PhoneNo.TooLong",
             "Phone Number is too long");
     }
+
+    public static class Password
+    {
+        public static readonly Error Empty = new(
+            "Password.Empty",
+            "Password is empty");
+
+    }
 }

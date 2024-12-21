@@ -4,5 +4,7 @@ internal static class TableNames
 {
     internal const string tbl_Members = nameof(tbl_Members);   
 
+    internal const string tbl_MemberCredential = nameof(tbl_MemberCredential);   
+
     internal const string tbl_OutboxMessage = nameof(tbl_OutboxMessage);   
 }

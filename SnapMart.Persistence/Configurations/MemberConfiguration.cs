@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SnapMart.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SnapMart.Persistence.Constants;
 using SnapMart.Domain.ValueObjects;
+using SnapMart.Domain.Entities.MemberEntities;
 
 namespace SnapMart.Persistence.Configurations;
 

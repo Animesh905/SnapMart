@@ -6,6 +6,7 @@ using SnapMart.Application.Behavior;
 using SnapMart.Persistence;
 using SnapMart.Persistence.Interceptors;
 using SnapMart.WebApi;
+using SnapMart.WebApi.Middleware;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -94,6 +95,8 @@ builder.Services.AddRateLimiter(options =>
     };
 });
 
+builder.Services.AddTransient<APIAuthenticationMiddleware>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -138,9 +141,9 @@ app.Use(async (context, next) =>
     Console.WriteLine($"Rejected Requests Count: {rejectedRequestCount}");
 });
 
+app.UseMiddleware<APIAuthenticationMiddleware>();
 
 app.UseRateLimiter();
-
 app.MapControllers();
 
 app.Run();
