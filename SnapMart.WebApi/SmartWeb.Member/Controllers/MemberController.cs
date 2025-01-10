@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Asp.Versioning.Builder;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
@@ -9,8 +10,7 @@ using SnapMart.WebApi.SmartWeb.Member.Contracts;
 
 namespace SnapMart.WebApi.SmartWeb.Member.Controllers;
 
-[ApiVersion(1, Deprecated = true)]
-[ApiVersion(2)]
+[ApiVersion("1.0", Deprecated = true)]
 [Route("api/v{version:apiVersion}/[controller]")]
 public class MemberController : ApiController
 {
@@ -21,7 +21,7 @@ public class MemberController : ApiController
     }
 
     [HttpPost("RegisterMember")]
-    [MapToApiVersion(1)]
+    [MapToApiVersion("1.0")]
     [EnableRateLimiting("TokenBucketPolicy")]
     public async Task<IActionResult> RegisterMember(
         [FromBody] RegisterMemberRequest request,
